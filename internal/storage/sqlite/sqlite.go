@@ -101,7 +101,7 @@ func (s *Sqlite) GetStudents() ([]types.Student, error) {
 	for rows.Next() {
 		var student types.Student
 
-		rows.Scan(&student.Id, &student.Name, &student.Email, &student.Age)
+		err := rows.Scan(&student.Id, &student.Name, &student.Email, &student.Age)
 		if err != nil{
 			return nil, err
 		}
