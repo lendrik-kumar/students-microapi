@@ -31,6 +31,7 @@ func main() {
 
 	router.HandleFunc("POST /api/students", student.New(storage))
 	router.HandleFunc("GET /api/students/{id}", student.GetById(storage))
+	router.HandleFunc("GET /api/students", student.GetList(storage))
 
 	slog.Info("server is starting ", slog.String("address", cfg.HttpServer.Addr))
 	fmt.Printf("server listining on %s", cfg.HttpServer.Addr)
