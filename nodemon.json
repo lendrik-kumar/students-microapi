@@ -1,5 +1,6 @@
 {
   "exec": "go run cmd/students-api/main.go -config config/local.yaml",
-  "ext": "go",
-  "watch": ["cmd", "internal", "pkg"]
+  "ext": "go rs",
+  "watch": ["cmd", "internal", "pkg"],
+  "signal": "SIGTERM"
 }
