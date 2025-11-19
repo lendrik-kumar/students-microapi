@@ -13,10 +13,19 @@ import (
 
 	"github.com/lendrik-kumar/students-microapi/internal/config"
 	"github.com/lendrik-kumar/students-microapi/internal/http/handlers/student"
+	"github.com/lendrik-kumar/students-microapi/internal/storage/sqlite"
 )
 
 func main() {
 	cfg := config.MustLoad()
+
+	_, err := sqlite.New(cfg)
+	if err != nil {
+		log.Fatal(err)
+		return
+	}
+
+	slog.Info("db initialized", slog.String("env", cfg.Env))
 
 	router := http.NewServeMux()
 
@@ -47,7 +56,7 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	err := server.Shutdown(ctx)
+	err = server.Shutdown(ctx)
 
 	if err != nil {
 		slog.Error("failed to shutdown", slog.String("error", err.Error()))
