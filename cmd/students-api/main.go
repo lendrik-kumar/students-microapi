@@ -19,7 +19,7 @@ import (
 func main() {
 	cfg := config.MustLoad()
 
-	_, err := sqlite.New(cfg)
+	storage, err := sqlite.New(cfg)
 	if err != nil {
 		log.Fatal(err)
 		return
@@ -29,7 +29,7 @@ func main() {
 
 	router := http.NewServeMux()
 
-	router.HandleFunc("POST /api/students", student.New())
+	router.HandleFunc("POST /api/students", student.New(storage))
 
 	slog.Info("server is starting ", slog.String("address", cfg.HttpServer.Addr))
 	fmt.Printf("server listining on %s", cfg.HttpServer.Addr)
