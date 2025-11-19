@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/lendrik-kumar/Go-students-api/internal/config"
+	"github.com/lendrik-kumar/students-microapi/internal/config"
 )
 
 func main() {
@@ -14,11 +14,11 @@ func main() {
 	router := http.NewServeMux()
 
 	router.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("welecome to api"))
+		w.Write([]byte("hello world!"))
 	})
 
 	router.HandleFunc("POST /hello", func(w http.ResponseWriter, r *http.Request) {
-		
+
 	})
 
 	fmt.Printf("server listining on %s", cfg.HttpServer.Addr)
